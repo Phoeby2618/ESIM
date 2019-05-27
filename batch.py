@@ -9,7 +9,7 @@ class BatchGenerator(object):
     construct raw_data generator.The input X,y should be narray or list like type
     '''
     def __init__(self,X1,X2,y,x1_len,x2_len,word_dict,shuffle):
-        if type(X1)!=np.ndarray:         #为什么是ndarray类型？？
+        if type(X1)!=np.ndarray:         
             X=np.array(X1)
         if type(y)!=np.ndarray:
             y=np.array(y)
@@ -26,7 +26,7 @@ class BatchGenerator(object):
         self.padnum = self.word_dicts['PADDING']
 
         self.datasize=len(y)
-        if shuffle:                                                         #True 为先提前打乱好
+        if shuffle:                                                        
             index=np.random.permutation(self._number_example)
             self.X1=self.X1[index]
             self.X2=self.X2[index]
