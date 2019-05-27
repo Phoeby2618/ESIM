@@ -210,8 +210,9 @@ def test(data_test,config):
 def main():
     config = configs.parser_args()
 
-    pretrain_embedding = get_embedding(config.embedding_dir, config.embedding_file)
-    config.word_embedding=pretrain_embedding
+    if os.path.exists(os.path.join(config.embedding_dir,config.embedding_file)):
+        pretrain_embedding = get_embedding(config.embedding_dir, config.embedding_file)
+        config.word_embedding=pretrain_embedding
 
     if not os.path.exists(config.save_path):
         os.makedirs(config.save_path)
