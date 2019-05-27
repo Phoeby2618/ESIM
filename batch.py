@@ -9,7 +9,7 @@ class BatchGenerator(object):
     construct raw_data generator.The input X,y should be narray or list like type
     '''
     def __init__(self,X1,X2,y,x1_len,x2_len,word_dict,shuffle):
-        if type(X1)!=np.ndarray:         #为什么是ndarray类型？？
+        if type(X1)!=np.ndarray:         
             X=np.array(X1)
         if type(y)!=np.ndarray:
             y=np.array(y)
@@ -26,7 +26,7 @@ class BatchGenerator(object):
         self.padnum = self.word_dicts['PADDING']
 
         self.datasize=len(y)
-        if shuffle:                                                         #True 为先提前打乱好
+        if shuffle:                                                        
             index=np.random.permutation(self._number_example)
             self.X1=self.X1[index]
             self.X2=self.X2[index]
@@ -49,20 +49,6 @@ class BatchGenerator(object):
     def _number_example(self):
             return self._number_example
 
-    def padding(self, sentences,max_len):
-
-        sens=[]
-        # 这里长的要截掉！！设计引用的问题，，
-        for s in sentences:
-                num = max_len - len(s)
-                # 这里的s0需要单独用切片操作取出，否则还是在原list上操作
-                # 还有一种方法是将长的截取！
-                s0 = s[:]
-                for i in range(num):
-                    s0.append(self.word_dicts['PADDING'])
-                sens.append(s0)
-        return sens
-
     def next_batch(self,batch_size):
             '''return raw_data in batch_size
                 consider epoche
@@ -79,7 +65,7 @@ class BatchGenerator(object):
                     self.x2_len = self.x2_len[index]
                     self.y = self.y[index]
 
-                start=0                                                      #这里这么写是因为又开始了新的batch，start=0开始
+                start=0                                                   
                 self._index_in_epoch=batch_size
                 assert batch_size<self._number_example
             end=self._index_in_epoch
